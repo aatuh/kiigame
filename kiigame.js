@@ -223,8 +223,6 @@ stage.get('#start_game')[0].on('tap click', function(event) {
 Play music
 string id - object ID from JSON with "music":"file name" attribute
 */
-// TODO: 
-// TODO: Music should loop without JSON attribute, explicit denial stops it?
 function play_music(id) {
     var data = objects_json[id];
     
@@ -243,6 +241,8 @@ function play_music(id) {
             current_music.pause();
         
         current_music = new Audio(data.music);
+        
+        // TODO: If one room has loop off and another on?
         data.music_loop === false ? current_music.loop = false : current_music.loop = true;
         
 	    current_music.play();
@@ -339,7 +339,7 @@ stage.get('#start_credits')[0].on('tap click', function(event) {
 	setMonologue(event.getAttr('id'));
 });
 // Developer feature - shortcut menu from the empty menu button for testing purposes
-	stage.get('#start_empty')[0].on('tap click', function(event) {
+stage.get('#start_empty')[0].on('tap click', function(event) {
 	event = event.targetNode;
 	var clone;
     
